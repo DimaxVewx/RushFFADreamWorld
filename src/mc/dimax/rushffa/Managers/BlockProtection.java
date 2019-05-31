@@ -58,7 +58,7 @@ public class BlockProtection implements Listener {
                     itemStack.setAmount(amount);
                     player.getInventory().setItem(i, amount > 0 ? itemStack : null);
                     player.updateInventory();
-                    break;
+                   break;
                 }
             }
         } else if(block.getType().equals(Material.TNT)) {

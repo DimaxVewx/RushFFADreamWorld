@@ -39,12 +39,7 @@ public class InteractMenu implements Listener {
                 InfosMenu.open(player);
             }
             if(e.getItem().getType() == Material.NETHER_STAR){
-                player.teleport(new Location(Bukkit.getWorld("trush"), 644.584, 21, -272.605));
-                player.getInventory().clear();
-                ItemBuilder spec = new ItemBuilder(Material.WOOD_DOOR).setName("§cQuitter le mode spectateur");
-                Main.getInstance().title.sendFullTitle(player, 20, 100, 20, "§eSpectateur", "§bvous êtes à présent spectateur");
-                player.getInventory().setItem(4, spec.toItemStack());
-                player.setGameMode(GameMode.SPECTATOR);
+                player.sendMessage("§cPour bientôt.......");
             }
         }
 
