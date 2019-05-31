@@ -1,0 +1,8 @@
+name: RushFFADreamWorld
+author: Dimax
+version: '1.0'
+main: mc.dimax.rushffa.Main
+depend: [PermissionsEx, DreamWorldAPI]
+
+commands:
+  setspawn:
