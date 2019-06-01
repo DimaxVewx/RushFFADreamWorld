@@ -10,12 +10,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import ru.tehkode.permissions.PermissionUser;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class JoinGame implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player player = e.getPlayer();
+        PermissionUser user = PermissionsEx.getUser(player);
         player.teleport(new Location(Bukkit.getWorld("ffarush"), -1446.5, 105, -594.2));
         Main.getInstance().getScoreboardManager().onLogin(player);
         ItemBuilder jouer = new ItemBuilder(Material.IRON_AXE).setName("§bJouer au jeu").setUnbreakable(true);
@@ -27,9 +30,9 @@ public class JoinGame implements Listener {
         player.getInventory().setItem(0, jouer.toItemStack());
         player.getInventory().setItem(8, hub.toItemStack());
         player.getInventory().setItem(1, spec.toItemStack());
-        Main.getInstance().title.sendFullTitle(player, 20, 100, 20, "§bRush§7FFA", "§cCe mode de jeu est en BETA");
+        Main.getInstance().title.sendFullTitle(player, 20, 100, 20, "§cRushFFA", "§c§k! §4Ce mode de jeu est en BETA §c§k!");
         Main.getInstance().title.sendActionBar(player, "§bNous sommes §7: "+Bukkit.getOnlinePlayers().size()+" §bconnectés");
-        e.setJoinMessage(null);
+        e.setJoinMessage("§4" +user.getName()+" §crejoint le rushffa");
 
 
 

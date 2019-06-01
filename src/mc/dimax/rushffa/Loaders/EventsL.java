@@ -2,7 +2,6 @@ package mc.dimax.rushffa.Loaders;
 
 import mc.dimax.rushffa.Events.*;
 import mc.dimax.rushffa.Listeners.InteractMenu;
-import mc.dimax.rushffa.Listeners.Inventaire;
 import mc.dimax.rushffa.Listeners.KillStreakListener;
 import mc.dimax.rushffa.Listeners.PlayerChat;
 import mc.dimax.rushffa.Managers.BlockProtection;
@@ -28,7 +27,6 @@ public class EventsL {
         pm.registerEvents(new JoinGame(), plugin);
         pm.registerEvents(new PlayerQuit(), plugin);
         pm.registerEvents(new PlayerDrop(), plugin);
-        pm.registerEvents(new Inventaire(), plugin);
         pm.registerEvents(new NoFeed(), plugin);
         pm.registerEvents(new PlayersMoove(), plugin);
         pm.registerEvents(new PlayerChat(), plugin);

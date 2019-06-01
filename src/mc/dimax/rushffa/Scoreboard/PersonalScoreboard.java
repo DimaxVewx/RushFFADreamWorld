@@ -1,6 +1,7 @@
 package mc.dimax.rushffa.Scoreboard;
 
 import mc.dimax.rushffa.Coins.Coins;
+import mc.dimax.rushffa.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
@@ -46,19 +47,21 @@ public class PersonalScoreboard {
 
     public void setLines(String ip){
         Coins coins = new Coins();
-        objectiveSign.setDisplayName("§aDream§eWorld");
+        objectiveSign.setDisplayName("§b§l§nDream§a§l§nWorld");
 
-        objectiveSign.setLine(0, "§1");
-        objectiveSign.setLine(1, "   §7Mort(s): §a"+ player.getStatistic(Statistic.DEATHS));
-        objectiveSign.setLine(2, "   §7Kill(s): §a" + player.getStatistic(Statistic.PLAYER_KILLS));
-        objectiveSign.setLine(3, "   §7Ping: §a"+ getPing(player));
-        objectiveSign.setLine(4, "   §7Coins: §a"+ coins.getCoins(player));
-        objectiveSign.setLine(5, "§7");
-        objectiveSign.setLine(6, "   §7Compte: §b"+player.getName());
-        objectiveSign.setLine(7, "   §7Joueurs: §b"+Bukkit.getOnlinePlayers().size());
-        objectiveSign.setLine(8, "   §7Serveur: §bRushFFA #1");
-        objectiveSign.setLine(9, "   §2");
-        objectiveSign.setLine(10, "    "+ip);
+
+        objectiveSign.setLine(0, "         §c§k! §4Serveur en beta §c§k!");
+        objectiveSign.setLine(1, "§1");
+        objectiveSign.setLine(2, "   §7Mort(s): §a"+ player.getStatistic(Statistic.DEATHS));
+        objectiveSign.setLine(3, "   §7Kill(s): §a" + player.getStatistic(Statistic.PLAYER_KILLS));
+        objectiveSign.setLine(4, "   §7Ping: §a"+ getPing(player));
+        objectiveSign.setLine(5, "   §7Coins: §a"+ (double) Math.round(coins.getCoins(player)));
+        objectiveSign.setLine(6, "§7");
+        objectiveSign.setLine(7, "   §7Blocks: "+ String.format("§b%d:%02d", Main.getInstance().timerblock.getTimer() / 60, Main.getInstance().timerblock.getTimer() % 60));
+        objectiveSign.setLine(8, "   §7Joueurs: §b"+Bukkit.getOnlinePlayers().size());
+        objectiveSign.setLine(9, "   §7Serveur: §bRushFFA #1");
+        objectiveSign.setLine(10, "   §2");
+        objectiveSign.setLine(11, "    "+ip);
 
         objectiveSign.updateLines();
     }

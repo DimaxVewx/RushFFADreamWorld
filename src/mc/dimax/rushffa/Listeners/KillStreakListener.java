@@ -3,9 +3,15 @@ package mc.dimax.rushffa.Listeners;
 import mc.dimax.rushffa.Coins.Coins;
 import mc.dimax.rushffa.Main;
 import mc.dimax.rushffa.Utils.ItemBuilder;
+import mc.dimax.rushffa.Utils.Title;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.minecraft.server.v1_9_R2.PacketPlayInClientCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -14,13 +20,22 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class KillStreakListener implements Listener {
 
+
+
     @EventHandler(priority = EventPriority.HIGH)
     public void onDeath(PlayerDeathEvent e) {
         Player player = e.getEntity();
         e.getDrops().clear();
         e.setDeathMessage(null);
         Coins coins = new Coins();
-        if(player.getKiller() != null){
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            PacketPlayInClientCommand cmd = new PacketPlayInClientCommand(
+                    PacketPlayInClientCommand.EnumClientCommand.PERFORM_RESPAWN);
+            ((CraftPlayer) player).getHandle().playerConnection.a(cmd);
+            player.playSound(player.getLocation(), Sound.ENTITY_GHAST_HURT, 1, 1);
+        }, 1L);
+        if(player.getKiller() != null && player.getKiller() != player){
+
             Player killer = player.getKiller();
             ItemBuilder pomme = new ItemBuilder(Material.GOLDEN_APPLE, 1);
             ItemBuilder tnt = new ItemBuilder(Material.TNT, 1);
@@ -28,7 +43,6 @@ public class KillStreakListener implements Listener {
             killer.getInventory().addItem(tnt.toItemStack());
             coins.addCoins(killer, 1);
             Main.getInstance().title.sendActionBar(killer,"§bVous avez reçu 1coins une §apomme dorée");
-
             Main.getInstance().getKillstreak().remove(player.getUniqueId());
             if (Main.getInstance().getKillstreak().get(killer.getUniqueId()) == null) {
                 Main.getInstance().getKillstreak().put(killer.getUniqueId(), 1);

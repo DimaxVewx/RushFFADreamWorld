@@ -26,6 +26,7 @@ public class Main extends JavaPlugin {
 
     private ScheduledExecutorService executorMonoThread;
     private ScheduledExecutorService scheduledExecutorService;
+    public BlockTask timerblock = new BlockTask();
 
     private Map<UUID, Integer> killstreak;
     private List<Block> blocks;
@@ -40,14 +41,17 @@ public class Main extends JavaPlugin {
         registerCoordonates();
         LoadBorders();
 
+        Bukkit.getWorld("trush").setTime(600);
+        Bukkit.getWorld("trush").setGameRuleValue("doDaylightCycle", "false");
+        Bukkit.getWorld("ffarush").setTime(600);
+        Bukkit.getWorld("ffarush").setGameRuleValue("doDaylightCycle", "false");
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         scheduledExecutorService = Executors.newScheduledThreadPool(16);
         executorMonoThread = Executors.newScheduledThreadPool(1);
         scoreboardManager = new ScoreboardManager();
         killstreak = new HashMap<>();
         blocks = new ArrayList<>();
-        BlockTask blockTask = new BlockTask();
-        blockTask.runTaskTimer(this, 200, 20);
+        timerblock.runTaskTimer(this, 200, 20);
 
     }
 

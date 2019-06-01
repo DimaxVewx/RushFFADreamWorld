@@ -43,10 +43,30 @@ public class InteractMenu implements Listener {
             }
         }
 
-
     }
     @EventHandler
     public void InventoryClick(InventoryClickEvent e){
+
+
+
+
+        if(e.getCurrentItem() == null) return;
+        switch (e.getCurrentItem().getType()) {
+            case SANDSTONE:
+            case TNT:
+            case FLINT_AND_STEEL:
+            case IRON_PICKAXE:
+            case IRON_SWORD:
+            case GOLDEN_APPLE:
+                e.setCancelled(false);
+                break;
+            default:
+                e.setCancelled(true);
+                break;
+        }
+
+
+        // POUR SPECTATEUR
         Player player = (Player) e.getWhoClicked();
         if(e.getCurrentItem() == null)
             return;
