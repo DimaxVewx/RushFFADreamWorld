@@ -1,2 +1,2 @@
 # RushFFADreamWorld
-Voici le plugin du rush ffa
+Plugin RushFFA dreamworld by DimaxSansLaFibre version " 1.3 "
