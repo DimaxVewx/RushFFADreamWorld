@@ -1,6 +1,7 @@
 package mc.dimax.rushffa.Events;
 
 import mc.dimax.rushffa.Main;
+import mc.dimax.rushffa.Utils.Booster;
 import mc.dimax.rushffa.Utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -27,10 +28,16 @@ public class JoinGame implements Listener {
         player.getInventory().setItem(0, jouer.toItemStack());
         player.getInventory().setItem(8, hub.toItemStack());
         player.getInventory().setItem(1, spec.toItemStack());
-        Main.getInstance().title.sendFullTitle(player, 20, 100, 20, "§bRush§7FFA", "§cCe mode de jeu est en BETA");
-        Main.getInstance().title.sendActionBar(player, "§bNous sommes §7: "+Bukkit.getOnlinePlayers().size()+" §bconnectés");
-        e.setJoinMessage(null);
 
+        e.setJoinMessage(null);
+        if(Booster.getMode() == true){
+            Booster.booster.add(player);
+            Main.getInstance().title.sendFullTitle(player, 20, 100, 20, "§6COINS MULTIPLIÉS PAR §6"+Booster.getMultiplier(), "§aProfitez-en !");
+            Main.getInstance().title.sendActionBar(player, "§bNous sommes §7: "+Bukkit.getOnlinePlayers().size()+" §bconnectés");
+        } else {
+            Main.getInstance().title.sendFullTitle(player, 20, 100, 20, "§bRush§7FFA", "§cCe mode de jeu est en BETA");
+            Main.getInstance().title.sendActionBar(player, "§bNous sommes §7: "+Bukkit.getOnlinePlayers().size()+" §bconnectés");
+        }
 
 
 
