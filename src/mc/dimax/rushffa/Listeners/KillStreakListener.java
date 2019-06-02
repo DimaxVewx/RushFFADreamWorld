@@ -42,7 +42,7 @@ public class KillStreakListener implements Listener {
             killer.getInventory().addItem(pomme.toItemStack());
             killer.getInventory().addItem(tnt.toItemStack());
             coins.addCoins(killer, 1);
-            Main.getInstance().title.sendActionBar(killer,"§bVous avez reçu 1coins une §apomme dorée");
+            Main.getInstance().title.sendActionBar(killer,"§bVous avez reçu 1coins une §apomme dorée et une tnt");
             Main.getInstance().getKillstreak().remove(player.getUniqueId());
             if (Main.getInstance().getKillstreak().get(killer.getUniqueId()) == null) {
                 Main.getInstance().getKillstreak().put(killer.getUniqueId(), 1);
