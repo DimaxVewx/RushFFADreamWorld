@@ -55,7 +55,7 @@ public class PersonalScoreboard {
         objectiveSign.setLine(2, "   §7Mort(s): §a"+ player.getStatistic(Statistic.DEATHS));
         objectiveSign.setLine(3, "   §7Kill(s): §a" + player.getStatistic(Statistic.PLAYER_KILLS));
         objectiveSign.setLine(4, "   §7Ping: §a"+ getPing(player));
-        objectiveSign.setLine(5, "   §7Coins: §a"+ (double) Math.round(coins.getCoins(player)));
+        objectiveSign.setLine(5, "   §7Coins: §a"+ coins.getCoins(player));
         objectiveSign.setLine(6, "§7");
         objectiveSign.setLine(7, "   §7Blocks: "+ String.format("§b%d:%02d", Main.getInstance().timerblock.getTimer() / 60, Main.getInstance().timerblock.getTimer() % 60));
         objectiveSign.setLine(8, "   §7Joueurs: §b"+Bukkit.getOnlinePlayers().size());

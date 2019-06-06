@@ -8,3 +8,5 @@ commands:
     description: SetSpawn
   booster:
     description: Booster
+  belhamiti:
+    description: Command FUN
