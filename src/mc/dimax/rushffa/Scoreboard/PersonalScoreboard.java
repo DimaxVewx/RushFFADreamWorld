@@ -29,6 +29,7 @@ public class PersonalScoreboard {
     private Player player;
     private final UUID uuid;
     private final ObjectiveSign objectiveSign;
+    private static fr.nexusmc.api.coins.Coins coins = new fr.nexusmc.api.coins.Coins();
 
     public int getPing(Player player) {
         return ((CraftPlayer) player).getHandle().ping;

@@ -20,14 +20,13 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class KillStreakListener implements Listener {
 
-
+    private static fr.nexusmc.api.coins.Coins coins = new fr.nexusmc.api.coins.Coins();
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onDeath(PlayerDeathEvent e) {
         Player player = e.getEntity();
         e.getDrops().clear();
         e.setDeathMessage(null);
-        Coins coins = new Coins();
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
             PacketPlayInClientCommand cmd = new PacketPlayInClientCommand(
                     PacketPlayInClientCommand.EnumClientCommand.PERFORM_RESPAWN);
