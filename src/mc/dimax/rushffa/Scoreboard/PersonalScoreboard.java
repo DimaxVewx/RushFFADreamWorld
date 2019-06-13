@@ -50,8 +50,6 @@ public class PersonalScoreboard {
         Coins coins = new Coins();
         objectiveSign.setDisplayName("§b§l§nDream§a§l§nWorld");
 
-
-        objectiveSign.setLine(0, "         §c§k! §4Serveur en beta §c§k!");
         objectiveSign.setLine(1, "§1");
         objectiveSign.setLine(2, "   §7Mort(s): §a"+ player.getStatistic(Statistic.DEATHS));
         objectiveSign.setLine(3, "   §7Kill(s): §a" + player.getStatistic(Statistic.PLAYER_KILLS));

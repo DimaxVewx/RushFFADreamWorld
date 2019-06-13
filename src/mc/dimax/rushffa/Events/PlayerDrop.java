@@ -28,14 +28,14 @@ public class PlayerDrop implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
         Main.getInstance().title.sendTitle(player, 20, 100, 20, "§4Vous êtes mort.");
         ItemBuilder jouer = new ItemBuilder(Material.IRON_AXE).setName("§bJouer au jeu").setUnbreakable(true);
-        ItemBuilder infos = new ItemBuilder(Material.REDSTONE).setName("§aVos informations");
-        ItemBuilder spec = new ItemBuilder(Material.NETHER_STAR).setName("§bMode spectateur");
+        ItemBuilder profil = new ItemBuilder(Material.SKULL_ITEM, 1, (short) 3).setSkullOwner(player.getName()).setName("§aStatistiques");
+        ItemBuilder jouer2 = new ItemBuilder(Material.GOLD_AXE).setName("§6Jouer au jeu (VIP)");
         ItemBuilder hub = new ItemBuilder(Material.BED).setName("§cRevenir au lobby");
         player.getInventory().clear();
-        player.getInventory().setItem(4, infos.toItemStack());
+        player.getInventory().setItem(4, profil.toItemStack());
         player.getInventory().setItem(0, jouer.toItemStack());
         player.getInventory().setItem(8, hub.toItemStack());
-        player.getInventory().setItem(1, spec.toItemStack());
+        player.getInventory().setItem(1, jouer2.toItemStack());
 
         if(player.getKiller() != null){
             Player killer = player.getKiller();

@@ -5,29 +5,47 @@ import mc.dimax.rushffa.SousMenus.InfosPersonnel;
 import mc.dimax.rushffa.Utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Statistic;
+import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import ru.tehkode.permissions.PermissionUser;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class InfosMenu implements Listener {
+    public int getPing(Player player) {
+        return ((CraftPlayer) player).getHandle().ping;
+    }
     public static void open(Player player){
         Coins coins = new Coins();
-        Inventory inv = Bukkit.createInventory(null, 54, "§aInformations");
+        PermissionUser user = PermissionsEx.getUser(player);
 
-        ItemBuilder infos = new ItemBuilder(Material.BLAZE_POWDER).setName("§bCompte")
-                .setLore("§bCompte: §b" +player.getName());
-        inv.setItem(21, infos.toItemStack());
+        Inventory inv = Bukkit.createInventory(null, 9, "§aInformations");
 
-        ItemBuilder infos2 = new ItemBuilder(Material.PAPER).setName("§aInformations général")
-                .setLore("§bAdresse: §c"+player.getAddress(),"§bCoins: §c"+coins.getCoins(player));
-        inv.setItem(23, infos2.toItemStack());
 
-        ItemBuilder end = new ItemBuilder(Material.WOOD_DOOR).setName("§cFermer le menu");
-        inv.setItem(53, end.toItemStack());
+        ItemBuilder stats = new ItemBuilder(Material.SKULL_ITEM, 1, (short) 3).setSkullOwner(player.getName()).setName("§aStatistiques")
+                .setLore("§cGrade: "+user.getPrefix().replaceAll("&", "§"),
+                "§7Morts §c"+player.getStatistic(Statistic.DEATHS),
+                "§7Kills §b"+player.getStatistic(Statistic.PLAYER_KILLS),
+                "§7Ratio §b"+Double.toString((double) Math.round(getRatio(player) * 100) / 100),
+                "§7Coins §b"+ coins.getCoins(player)+"§b⛁");
+
+
+        inv.setItem(4, stats.toItemStack());
+
+
 
         player.openInventory(inv);
+    }
+
+    public static double getRatio(Player player){
+        int kills = player.getStatistic(Statistic.PLAYER_KILLS);
+        double deaths = player.getStatistic(Statistic.DEATHS);
+        double ratio = kills / deaths;
+        return ratio;
     }
 
     @EventHandler
@@ -38,20 +56,9 @@ public class InfosMenu implements Listener {
             if(e.getCurrentItem() == null || e.getCurrentItem().getType() == Material.AIR)return;
             switch (e.getCurrentItem().getItemMeta().getDisplayName()){
 
-                case "§bCompte":
+                case "§aStatistiques":
                     player.sendMessage("§7ton pseudo §b" +player.getName());
                     player.closeInventory();
-                    break;
-
-                case "§aInformations général":
-                    player.sendMessage("§bOuverture du sous-menu.....");
-                    player.closeInventory();
-                    InfosPersonnel.open(player);
-                    break;
-
-                case "§cFermer le menu":
-                    player.closeInventory();
-
                     break;
 
 

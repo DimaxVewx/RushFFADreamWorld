@@ -1,11 +1,13 @@
 package mc.dimax.rushffa.Listeners;
 
 import mc.dimax.rushffa.Kits.Joueur;
+import mc.dimax.rushffa.Kits.VIP;
 import mc.dimax.rushffa.Main;
 import mc.dimax.rushffa.Managers.CoordonatesManager;
 import mc.dimax.rushffa.Menus.HubMenu;
 import mc.dimax.rushffa.Menus.InfosMenu;
 import mc.dimax.rushffa.Utils.ItemBuilder;
+import mc.dimax.rushffa.Utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -30,16 +32,26 @@ public class InteractMenu implements Listener {
                 Main.getInstance().getCoords().forEach(a -> {
                     player.teleport(a.getSpawn());
                 });
-                player.sendMessage("§7[§bRushFFA§7] §aBon courage l'ami...");
+                Main.getInstance().title.sendActionBar(player, "§aVoici ton kit, bon courage.");
             }
             if(e.getItem().getType() == Material.BED){
-                HubMenu.open(player);
+                Main.getInstance().title.sendTitle(player, 20, 100, 20, "§4Retour vers le lobby");
+                PlayerUtils.connect(player, "lobby");
             }
-            if(e.getItem().getType() == Material.REDSTONE){
+            if(e.getItem().getType() == Material.SKULL_ITEM){
                 InfosMenu.open(player);
             }
-            if(e.getItem().getType() == Material.NETHER_STAR){
-                player.sendMessage("§cPour bientôt.......");
+            if(e.getItem().getType() == Material.GOLD_AXE){
+                if(player.hasPermission("rushffa.kitvip")){
+                    Main.getInstance().title.sendActionBar(player, "§6Voici ton kit maitre...");
+                    Main.getInstance().getCoords().forEach(a -> {
+                        player.teleport(a.getSpawn());
+                    });
+                    VIP.kitSend(player);
+                } else {
+                    Main.getInstance().title.sendActionBar(player, "§6Tu n'as pas acheter ce kit depuis le hub.");
+
+                }
             }
         }
 

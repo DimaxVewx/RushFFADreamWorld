@@ -22,17 +22,16 @@ public class JoinGame implements Listener {
         player.teleport(new Location(Bukkit.getWorld("ffarush"), -1446.5, 105, -594.2));
         Main.getInstance().getScoreboardManager().onLogin(player);
         ItemBuilder jouer = new ItemBuilder(Material.IRON_AXE).setName("§bJouer au jeu").setUnbreakable(true);
-        ItemBuilder infos = new ItemBuilder(Material.REDSTONE).setName("§aVos informations");
-        ItemBuilder spec = new ItemBuilder(Material.NETHER_STAR).setName("§bMode spectateur");
+        ItemBuilder profil = new ItemBuilder(Material.SKULL_ITEM, 1, (short) 3).setSkullOwner(player.getName()).setName("§aStatistiques");
+        ItemBuilder jouer2 = new ItemBuilder(Material.GOLD_AXE).setName("§6Jouer au jeu (VIP)");
         ItemBuilder hub = new ItemBuilder(Material.BED).setName("§cRevenir au lobby");
         player.getInventory().clear();
-        player.getInventory().setItem(4, infos.toItemStack());
+        player.getInventory().setItem(4, profil.toItemStack());
         player.getInventory().setItem(0, jouer.toItemStack());
         player.getInventory().setItem(8, hub.toItemStack());
-        player.getInventory().setItem(1, spec.toItemStack());
-        Main.getInstance().title.sendFullTitle(player, 20, 100, 20, "§cRushFFA", "§c§k! §4Ce mode de jeu est en BETA §c§k!");
-        Main.getInstance().title.sendActionBar(player, "§bNous sommes §7: "+Bukkit.getOnlinePlayers().size()+" §bconnectés");
-        e.setJoinMessage("§4" +user.getName()+" §crejoint le rushffa");
+        player.getInventory().setItem(1, jouer2.toItemStack());
+        Main.getInstance().title.sendActionBar(player, "§6Bienvenue à toi §b"+player.getName()+" §6 sur le serveur RushFFA");
+
 
 
 
