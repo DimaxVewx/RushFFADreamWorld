@@ -31,7 +31,7 @@ public class JoinGame implements Listener {
         player.getInventory().setItem(8, hub.toItemStack());
         player.getInventory().setItem(1, jouer2.toItemStack());
         Main.getInstance().title.sendActionBar(player, "§6Bienvenue à toi §b"+player.getName()+" §6 sur le serveur RushFFA");
-
+        e.setJoinMessage("§4" +user.getName()+" §crejoint le rushffa");
 
 
 
